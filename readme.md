@@ -12,5 +12,6 @@
 ## mysql服务管理
 1. 初始化: bash my-init.sh
 2. 启动mysqld服务: bash my-start.sh
-2. 停止mysqld服务: bash my-stop.sh
+3. 停止mysqld服务: bash my-stop.sh
+4. 重启mysqld服务: bash my-restart.sh
 
