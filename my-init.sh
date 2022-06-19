@@ -11,14 +11,12 @@ rm -rf /usr/local/mysql/data/
 
 useradd -M -s /sbin/nologin mysql
 
-mkdir -p /mysql/data
+mkdir -p /usr/local/mysql/data/
 chown -R mysql:mysql   /usr/local/mysql
-chown -R mysql.mysql   /mysql/data
-chmod 750 /mysql/data
+chown -R mysql.mysql   /usr/local/mysql/data/
+chmod 750 /usr/local/mysql/data/
 
 mysqld   --initialize   --user=mysql
-
-mkdir -p /usr/local/mysql/data/
 
 if [ "0" != "$?" ]; then
     echo `date` "mysqld init fail"
