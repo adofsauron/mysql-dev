@@ -6,6 +6,7 @@ systemctl  status  mysql
 
 pkill -9 mysqld
 
+# notify: data will lost
 rm -rf /usr/local/mysql/data/
 
 useradd -M -s /sbin/nologin mysql
