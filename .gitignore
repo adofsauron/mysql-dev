@@ -1,0 +1,7 @@
+.vscode/
+.vs/
+out/
+obj/
+bin/
+*.tar.gz
+*.tar.bz2
