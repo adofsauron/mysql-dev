@@ -23,14 +23,22 @@ fi
 echo `date` "kill -15 $PID"
 kill -15 $PID
 
+WAIT_LIMIT=100
+index=1
 while true; do
+    if [ $WAIT_LIMIT == $index ]; then
+        echo `date` "wait mysqld stop but limit try num $WAIT_LIMIT"
+        exit 4
+    fi
+
     if [ "0" == "`ps -aux | grep $PID | grep -v grep | wc -l`" ]; then
         echo `date` "mysqld [$PID] has stop"
         break
     fi
 
-    echo `date` "mysql not stop over, sleep 1s"
+    echo `date` "mysql not stop over, wait 1s"
     sleep 1s
+    index=$(($index+1))
 done
 
 exit 0
