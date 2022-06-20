@@ -46,14 +46,16 @@ if [ "1" != "`which mysqld | wc -l`" ]; then
     exit 1
 fi
 
-if [ -f "/etc/init.d/mysqld" ]; then
-    rm -rf /etc/init.d/mysqld.back
-    mv /etc/init.d/mysqld /etc/init.d/mysqld.back
-fi
+## systemctl 
 
-cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
-chmod +x /etc/init.d/mysqld
-systemctl enable mysqld
+# if [ -f "/etc/init.d/mysqld" ]; then
+#     rm -rf /etc/init.d/mysqld.back
+#     mv /etc/init.d/mysqld /etc/init.d/mysqld.back
+# fi
+
+# cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+# chmod +x /etc/init.d/mysqld
+# systemctl enable mysqld
 
 echo "over"
 cd $HERE
