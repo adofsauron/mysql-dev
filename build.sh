@@ -3,26 +3,18 @@
 
 HERE=`pwd`
 
-cd origin
-
-rm -rf mysql-server-mysql-8.0.28
-
-echo `date` "tar -xzvf mysql-server-mysql-8.0.28.tar.gz"
-tar -xzvf mysql-server-mysql-8.0.28.tar.gz
-
-if [ "0" != "$?" ]; then
-    echo `date` "tar -xzvf mysql-server-mysql-8.0.28.tar.gz fail"
-    exit 1
-fi
+cd trunk
 
 cd mysql-server-mysql-8.0.28
 
-rm -rf build
-mkdir -p build
-cd build
-
-# verify prefix path
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local/mysql
+if [ ! -d build ]; then
+    mkdir -p build
+    cd build
+    # verify prefix path
+    cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local/mysql
+else
+    cd build
+fi
 
 # build
 make -j"$(nproc)"
