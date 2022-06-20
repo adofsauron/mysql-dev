@@ -19,6 +19,7 @@ fi
 
 chroot --userspec "mysql:mysql" "/" sh -c \
     $MYSQL_PATH/bin/mysqld --user=mysql \
+    --defaults-file=/etc/mysql/my.cnf \
     --basedir=$MYSQL_PATH \
     --datadir=$MYSQL_PATH/data \
     --plugin-dir=$MYSQL_PATH/lib/plugin \
