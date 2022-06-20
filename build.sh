@@ -1,5 +1,6 @@
 #!/bin/bash
 
+MYSQL_PATH=/usr/local/mysql
 
 HERE=`pwd`
 
@@ -11,7 +12,7 @@ if [ ! -d build ]; then
     mkdir -p build
     cd build
     # verify prefix path
-    cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local/mysql
+    cmake .. -DCMAKE_INSTALL_PREFIX=$MYSQL_PATH
 else
     cd build
 fi
@@ -31,7 +32,9 @@ if [ "0" != "$?" ]; then
     exit 1
 fi
 
-echo -e '\n\nexport PATH=/usr/local/mysql/bin:$PATH\n' >> /etc/profile && source /etc/profile
+if [ "0" == "`grep "$MYSQL_PATH/bin"  -rn /etc/profile  | wc -l`" ]; then
+    echo -e '\n\nexport PATH='$MYSQL_PATH'/bin:$PATH\n' >> /etc/profile && source /etc/profile
+fi
 
 if [ "1" != "`which mysqld | wc -l`" ]; then
     echo `date` "export mysql/bin fail"
@@ -45,7 +48,7 @@ fi
 #     mv /etc/init.d/mysqld /etc/init.d/mysqld.back
 # fi
 
-# cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+# cp $MYSQL_PATH/support-files/mysql.server /etc/init.d/mysqld
 # chmod +x /etc/init.d/mysqld
 # systemctl enable mysqld
 

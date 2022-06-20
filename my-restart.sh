@@ -1,6 +1,6 @@
 #!/bin/bash
 
-systemctl  restart  mysql
+bash my-stop.sh
 
-systemctl  status  mysql
+bash my-start.sh
 

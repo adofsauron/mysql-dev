@@ -1,20 +1,16 @@
 #!/bin/bash
 
-systemctl  stop  mysql
+MYSQL_PATH=/usr/local/mysql
 
-systemctl  status  mysql
-
-pkill -9 mysqld
-
-# notify: data will lost
-rm -rf /usr/local/mysql/data/
+# notice: data will lost
+rm -rf $MYSQL_PATH/data/
 
 useradd -M -s /sbin/nologin mysql
 
-mkdir -p /usr/local/mysql/data/
-chown -R mysql:mysql   /usr/local/mysql
-chown -R mysql.mysql   /usr/local/mysql/data/
-chmod 750 /usr/local/mysql/data/
+mkdir -p $MYSQL_PATH/data/
+chown -R mysql:mysql   $MYSQL_PATH
+chown -R mysql.mysql   $MYSQL_PATH/data/
+chmod 750 $MYSQL_PATH/data/
 
 mysqld   --initialize   --user=mysql
 
