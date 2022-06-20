@@ -28,16 +28,17 @@ index=1
 while true; do
     if [ $WAIT_LIMIT == $index ]; then
         echo `date` "wait mysqld stop but limit try num $WAIT_LIMIT"
-        exit 4
+        exit 1
     fi
 
     if [ "0" == "`ps -aux | grep $PID | grep -v grep | wc -l`" ]; then
-        echo `date` "mysqld [$PID] has stop"
+        echo `date` "mysqld [$PID] stop ok"
         break
     fi
 
     echo `date` "mysql not stop over, wait 1s"
     sleep 1s
+
     index=$(($index+1))
 done
 

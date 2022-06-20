@@ -37,22 +37,22 @@ while true; do
 
     if [ $WAIT_LIMIT == $index ]; then
         echo `date` "wait mysqld start but limit try num $WAIT_LIMIT"
-        exit 4
+        exit 2
     fi
 
     if [ -f $PID_FILE ]; then
         break
     fi
 
-    echo `date` "mysqld not start over, wait 3s"
-    sleep 3s
+    echo `date` "mysqld not start over, wait 1s"
+    sleep 1s
 
     index=$(($index+1))
 done
 
 if [ ! -f $PID_FILE ]; then
     echo `date` "mysqld start fail"
-    exit 2
+    exit 3
 fi
 
 PID=`cat $PID_FILE`
@@ -60,7 +60,7 @@ PID=`cat $PID_FILE`
 kill -0 $PID
 if [ "0" != "$?" ]; then
     echo `date` "mysqld [$PID] start fail"
-    exit 3
+    exit 4
 fi
 
 echo `date` "mysqld [$PID] start ok"
