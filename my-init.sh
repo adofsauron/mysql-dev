@@ -3,7 +3,11 @@
 MYSQL_PATH=/usr/local/mysql
 
 # notice: data will lost
-rm -rf $MYSQL_PATH/data/
+
+if [ -d $MYSQL_PATH/data/ ]; then
+    rm -rf $MYSQL_PATH/data.back
+    mv $MYSQL_PATH/data $MYSQL_PATH/data.back
+fi
 
 useradd -M -s /sbin/nologin mysql
 
