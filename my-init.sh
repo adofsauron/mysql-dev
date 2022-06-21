@@ -16,7 +16,7 @@ chown -R mysql:mysql   $MYSQL_PATH
 chown -R mysql.mysql   $MYSQL_PATH/data/
 chmod 750 $MYSQL_PATH/data/
 
-mysqld   --initialize   --user=mysql
+mysqld --initialize --user=mysql
 
 if [ "0" != "$?" ]; then
     echo `date` "mysqld init fail"
