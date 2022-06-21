@@ -26,6 +26,6 @@ cd boost_1_73_0
 
 ./b2 header
 
-./b2 install
+./b2 install --prefix=/usr
 
 cd $HERE
