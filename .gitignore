@@ -5,3 +5,5 @@ obj/
 bin/
 *.tar.gz
 *.tar.bz2
+3rd/boost_1_73_0/
+trunk/mysql-server-mysql-8.0.28/build/
