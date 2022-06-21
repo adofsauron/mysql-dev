@@ -1,6 +1,8 @@
 
 git config --global core.autocrlf false
 
+git config advice.useCoreFSMonitorConfig false
+
 git pull
 
 git add .
