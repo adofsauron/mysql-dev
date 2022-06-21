@@ -20,7 +20,7 @@ fi
 
 cd boost_1_73_0
 
-./bootstrap.sh
+./bootstrap.sh --with-libraries=all
 
 ./b2
 
