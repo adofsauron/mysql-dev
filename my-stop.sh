@@ -11,6 +11,7 @@ fi
 
 PID=`cat $PID_FILE`
 
+#  mysqld name
 kill -0 $PID
 if [ "1" == "$?" ]; then
     echo `date` "mysqld [$PID] already stop"

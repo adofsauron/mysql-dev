@@ -35,8 +35,10 @@ if [ "0" != "$?" ]; then
 fi
 
 if [ "0" == "`grep "$MYSQL_PATH/bin"  -rn /etc/profile  | wc -l`" ]; then
-    echo -e '\n\nexport PATH='$MYSQL_PATH'/bin:$PATH\n' >> /etc/profile && source /etc/profile
+    echo -e '\n\nexport PATH='$MYSQL_PATH'/bin:$PATH\n' >> /etc/profile
+    source /etc/profile
 fi
+
 
 if [ "1" != "`which mysqld | wc -l`" ]; then
     echo `date` "export mysql/bin fail"

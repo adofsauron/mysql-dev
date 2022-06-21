@@ -25,3 +25,5 @@ fi
 
 echo `date` "mysqld init ok"
 exit 0
+
+# IlLHkh8Zd6&*
