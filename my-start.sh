@@ -24,7 +24,7 @@ fi
 MYSQL_CONF=./trunk/conf/my.cnf
 
 nohup chroot --userspec "mysql:mysql" "/" sh -c \
-    $MYSQL_PATH/bin/mysqld_safe --user=mysql \
+    $MYSQL_PATH/bin/mysqld --user=mysql \
     --defaults-file=$MYSQL_CONF \
     --basedir=$MYSQL_PATH \
     --datadir=$MYSQL_PATH/data \
