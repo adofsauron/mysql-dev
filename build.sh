@@ -8,6 +8,10 @@ cd trunk
 
 cd mysql-server-mysql-8.0.28
 
+# LOCAL=`pwd`
+# scl enable gcc-toolset-10 bash
+# cd $LOCAL
+
 if [ ! -d build ]; then
     mkdir -p build
     cd build
