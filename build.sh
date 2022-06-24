@@ -15,8 +15,7 @@ if [ ! -d build ]; then
     cd build
     # verify prefix path
     cmake .. -DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
-    -DWITH_SYSTEM_LIBS_DEFAULT=ON \
-    -DDOWNLOAD_BOOST=1 -DWITH_BOOST=../boost
+    -DWITH_SYSTEM_LIBS_DEFAULT=ON 
 else
     cd build
 fi

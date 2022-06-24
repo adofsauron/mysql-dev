@@ -10,14 +10,13 @@ cd trunk
 
 cd mysql-server-mysql-8.0.28
 
-rm -rf build 
-
 if [ ! -d build ]; then
     mkdir -p build
     cd build
     # verify prefix path
     cmake .. -DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
-    -DWITH_SYSTEM_LIBS_DEFAULT=ON
+    -DWITH_SYSTEM_LIBS_DEFAULT=ON \
+    -DDOWNLOAD_BOOST=1 -DWITH_BOOST=../boost
 else
     cd build
 fi
@@ -38,8 +37,10 @@ if [ "0" != "$?" ]; then
 fi
 
 if [ "0" == "`grep "$MYSQL_PATH/bin"  -rn /etc/profile  | wc -l`" ]; then
-    echo -e '\n\nexport PATH='$MYSQL_PATH'/bin:$PATH\n' >> /etc/profile && source /etc/profile
+    echo -e '\n\nexport PATH='$MYSQL_PATH'/bin:$PATH\n' >> /etc/profile
+    source /etc/profile
 fi
+
 
 if [ "1" != "`which mysqld | wc -l`" ]; then
     echo `date` "export mysql/bin fail"
