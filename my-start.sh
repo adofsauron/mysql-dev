@@ -5,20 +5,31 @@ MYSQL_PATH=/usr/local/mysql
 PID_FILE=$MYSQL_PATH/data/localhost.pid
 
 # pid的文件存在,不能说明mysqld已启动,必须校验pid
-if [ -f $PID_FILE ]; then
+
+while true;do
+
+    if [ ! -f $PID_FILE ]; then
+        break
+    fi
+
     PID=`cat $PID_FILE`
 
     kill -0 $PID
-    if [ "0" == "$?" ]; then
-        echo `date` "mysqld [$PID] already start"
-        exit 0
-    else
-        echo `date` "mysqld [$PID] file has, but not start"
+    if [ "0" != "$?" ]; then
+        echo `date` "mysqld [$PID] file has, but not start, rm pid file $PID_FILE"
         rm -f $PID_FILE
+        break
     fi
 
-    #  ps -aux | grep mysqld
-fi
+    PID_NUM=`ps -aux | grep $MYSQL_PATH/bin/mysqld | grep $PID | grep -v grep | wc -l`
+
+    if [ "1" == "$PID_NUM" ];then 
+        echo `date` "mysqld [$PID] already start"
+        exit 0
+    fi
+
+    break
+done
 
 # cnf file
 MYSQL_CONF=./trunk/conf/my.cnf
