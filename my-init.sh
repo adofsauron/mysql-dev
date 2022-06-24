@@ -1,5 +1,7 @@
 #!/bin/bash
 
+bash ./my-stop.sh
+
 MYSQL_PATH=/usr/local/mysql
 
 # notice: data will lost
@@ -32,5 +34,3 @@ fi
 
 echo `date` "mysqld init ok"
 exit 0
-
-# IlLHkh8Zd6&*
