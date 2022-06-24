@@ -15,7 +15,8 @@ if [ ! -d build ]; then
     cd build
     # verify prefix path
     cmake .. -DCMAKE_INSTALL_PREFIX=$MYSQL_PATH \
-    -DWITH_SYSTEM_LIBS_DEFAULT=ON 
+    -DWITH_SYSTEM_LIBS_DEFAULT=ON \
+    -DCMAKE_CXX_FLAGS_RELWITHDEBINFO="-O0 -g -DNDEBUG"
 else
     cd build
 fi
