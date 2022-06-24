@@ -20,7 +20,9 @@ fi
 
 cd boost_1_73_0
 
-./bootstrap.sh --with-libraries=all
+bash ./bootstrap.sh --with-libraries=all
+
+chmod +x ./b2
 
 ./b2
 
