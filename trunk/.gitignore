@@ -1,0 +1,13 @@
+.vscode/
+.vs/
+out/
+obj/
+bin/
+*.tar.gz
+*.tar.bz2
+mysql-server-mysql-8.0.28/build/
+mysql-server-mysql-8.0.28/build-x86/
+mysql-server-mysql-8.0.28/boost/
+mysql-server-mysql-8.0.28/boost-x86/
+*.out
+*.o
