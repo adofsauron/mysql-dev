@@ -1,0 +1,13 @@
+.vscode/
+.vs/
+out/
+obj/
+bin/
+*.tar.gz
+*.tar.bz2
+build/
+build-x86/
+boost/
+boost-x86/
+*.out
+*.o
