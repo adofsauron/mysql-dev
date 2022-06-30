@@ -10,8 +10,6 @@ cd trunk
 
 cd mysql-server-mysql-8.0.28
 
-rm build -rf
-
 if [ ! -d build ]; then
     mkdir -p build
     cd build
