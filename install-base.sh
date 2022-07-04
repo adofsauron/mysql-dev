@@ -8,6 +8,5 @@ yum install -y gcc gcc-c++ \
     python3 python3-devel libicu libicu-devel zlib zlib-devel bzip2 bzip2-devel \
     make cmake automake \
     pigz zstd libzstd-devel \
-    openssl-devel ncurses-devel libtirpc-devel libudev-devel \
-    rpcgen
+    openssl-devel ncurses-devel libtirpc-devel libudev-devel 
 
