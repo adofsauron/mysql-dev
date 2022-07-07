@@ -1,0 +1,365 @@
+drop table if exists t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key(a,b))
+partition by range (a)
+partitions 3
+(partition x1 values less than (5) tablespace ts1,
+partition x2 values less than (10) tablespace ts2,
+partition x3 values less than maxvalue tablespace ts3);
+INSERT into t1 values (1, 1, 1);
+INSERT into t1 values (6, 1, 1);
+INSERT into t1 values (10, 1, 1);
+INSERT into t1 values (15, 1, 1);
+select * from t1;
+a	b	c
+1	1	1
+6	1	1
+10	1	1
+15	1	1
+show create table t1;
+Table	Create Table
+t1	CREATE TABLE `t1` (
+  `a` int(11) NOT NULL,
+  `b` int(11) NOT NULL,
+  `c` int(11) NOT NULL,
+  PRIMARY KEY (`a`,`b`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 PARTITION BY RANGE (a) (PARTITION x1 VALUES LESS THAN (5) TABLESPACE = ts1 ENGINE = MyISAM, PARTITION x2 VALUES LESS THAN (10) TABLESPACE = ts2 ENGINE = MyISAM, PARTITION x3 VALUES LESS THAN MAXVALUE TABLESPACE = ts3 ENGINE = MyISAM)
+ALTER TABLE t1
+partition by range (a)
+partitions 3
+(partition x1 values less than (5) tablespace ts1,
+partition x2 values less than (10) tablespace ts2,
+partition x3 values less than maxvalue tablespace ts3);
+select * from t1;
+a	b	c
+1	1	1
+6	1	1
+10	1	1
+15	1	1
+show create table t1;
+Table	Create Table
+t1	CREATE TABLE `t1` (
+  `a` int(11) NOT NULL,
+  `b` int(11) NOT NULL,
+  `c` int(11) NOT NULL,
+  PRIMARY KEY (`a`,`b`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 PARTITION BY RANGE (a) (PARTITION x1 VALUES LESS THAN (5) TABLESPACE = ts1 ENGINE = MyISAM, PARTITION x2 VALUES LESS THAN (10) TABLESPACE = ts2 ENGINE = MyISAM, PARTITION x3 VALUES LESS THAN MAXVALUE TABLESPACE = ts3 ENGINE = MyISAM)
+drop table if exists t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null)
+partition by range (a)
+partitions 3
+(partition x1 values less than (5) tablespace ts1,
+partition x2 values less than (10) tablespace ts2,
+partition x3 values less than maxvalue tablespace ts3);
+INSERT into t1 values (1, 1, 1);
+INSERT into t1 values (6, 1, 1);
+INSERT into t1 values (10, 1, 1);
+INSERT into t1 values (15, 1, 1);
+select * from t1;
+a	b	c
+1	1	1
+6	1	1
+10	1	1
+15	1	1
+ALTER TABLE t1
+partition by range (a)
+partitions 3
+(partition x1 values less than (5) tablespace ts1,
+partition x2 values less than (10) tablespace ts2,
+partition x3 values less than maxvalue tablespace ts3);
+select * from t1;
+a	b	c
+1	1	1
+6	1	1
+10	1	1
+15	1	1
+drop table if exists t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key(a,b))
+partition by range (a)
+partitions 3
+(partition x1 values less than (5) tablespace ts1,
+partition x2 values less than (10) tablespace ts2,
+partition x3 values less than (15) tablespace ts3);
+INSERT into t1 values (1, 1, 1);
+INSERT into t1 values (6, 1, 1);
+INSERT into t1 values (10, 1, 1);
+INSERT into t1 values (15, 1, 1);
+ERROR HY000: Table has no partition for value 15
+select * from t1;
+a	b	c
+1	1	1
+6	1	1
+10	1	1
+ALTER TABLE t1
+partition by range (a)
+partitions 3
+(partition x1 values less than (5) tablespace ts1,
+partition x2 values less than (10) tablespace ts2,
+partition x3 values less than (15) tablespace ts3);
+select * from t1;
+a	b	c
+1	1	1
+6	1	1
+10	1	1
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key(a,b))
+partition by range (a)
+(partition x1 values less than (1));
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key (a,b)) 
+partition by range (a)
+subpartition by hash (a+b) 
+( partition x1 values less than (1)
+( subpartition x11,
+subpartition x12),
+partition x2 values less than (5)
+( subpartition x21,
+subpartition x22)
+);
+SELECT * from t1;
+a	b	c
+show create table t1;
+Table	Create Table
+t1	CREATE TABLE `t1` (
+  `a` int(11) NOT NULL,
+  `b` int(11) NOT NULL,
+  `c` int(11) NOT NULL,
+  PRIMARY KEY (`a`,`b`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 PARTITION BY RANGE (a) SUBPARTITION BY HASH (a+b) (PARTITION x1 VALUES LESS THAN (1)  (SUBPARTITION x11 ENGINE = MyISAM, SUBPARTITION x12 ENGINE = MyISAM), PARTITION x2 VALUES LESS THAN (5)  (SUBPARTITION x21 ENGINE = MyISAM, SUBPARTITION x22 ENGINE = MyISAM))
+ALTER TABLE t1 ADD COLUMN d int;
+show create table t1;
+Table	Create Table
+t1	CREATE TABLE `t1` (
+  `a` int(11) NOT NULL,
+  `b` int(11) NOT NULL,
+  `c` int(11) NOT NULL,
+  `d` int(11) DEFAULT NULL,
+  PRIMARY KEY (`a`,`b`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 PARTITION BY RANGE (a) SUBPARTITION BY HASH (a+b) (PARTITION x1 VALUES LESS THAN (1)  (SUBPARTITION x11 ENGINE = MyISAM, SUBPARTITION x12 ENGINE = MyISAM), PARTITION x2 VALUES LESS THAN (5)  (SUBPARTITION x21 ENGINE = MyISAM, SUBPARTITION x22 ENGINE = MyISAM))
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key (a,b))
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 tablespace t1 engine myisam nodegroup 0,
+subpartition x12 tablespace t2 engine myisam nodegroup 1),
+partition x2 values less than (5)
+( subpartition x21 tablespace t1 engine myisam nodegroup 0,
+subpartition x22 tablespace t2 engine myisam nodegroup 1)
+);
+SELECT * from t1;
+a	b	c
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key (a,b))
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 tablespace t1 nodegroup 0,
+subpartition x12 tablespace t2 nodegroup 1),
+partition x2 values less than (5)
+( subpartition x21 tablespace t1 nodegroup 0,
+subpartition x22 tablespace t2 nodegroup 1)
+);
+SELECT * from t1;
+a	b	c
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key (a,b))
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 engine myisam nodegroup 0,
+subpartition x12 engine myisam nodegroup 1),
+partition x2 values less than (5)
+( subpartition x21 engine myisam nodegroup 0,
+subpartition x22 engine myisam nodegroup 1)
+);
+INSERT into t1 VALUES (1,1,1);
+INSERT into t1 VALUES (4,1,1);
+INSERT into t1 VALUES (5,1,1);
+ERROR HY000: Table has no partition for value 5
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+ALTER TABLE t1
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 engine myisam nodegroup 0,
+subpartition x12 engine myisam nodegroup 1),
+partition x2 values less than (5)
+( subpartition x21 engine myisam nodegroup 0,
+subpartition x22 engine myisam nodegroup 1)
+);
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key (a,b))
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 tablespace t1 engine myisam,
+subpartition x12 tablespace t2 engine myisam),
+partition x2 values less than (5)
+( subpartition x21 tablespace t1 engine myisam,
+subpartition x22 tablespace t2 engine myisam)
+);
+INSERT into t1 VALUES (1,1,1);
+INSERT into t1 VALUES (4,1,1);
+INSERT into t1 VALUES (5,1,1);
+ERROR HY000: Table has no partition for value 5
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+ALTER TABLE t1
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 tablespace t1 engine myisam,
+subpartition x12 tablespace t2 engine myisam),
+partition x2 values less than (5)
+( subpartition x21 tablespace t1 engine myisam,
+subpartition x22 tablespace t2 engine myisam)
+);
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key (a,b))
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 tablespace t1,
+subpartition x12 tablespace t2),
+partition x2 values less than (5)
+( subpartition x21 tablespace t1,
+subpartition x22 tablespace t2)
+);
+INSERT into t1 VALUES (1,1,1);
+INSERT into t1 VALUES (4,1,1);
+INSERT into t1 VALUES (5,1,1);
+ERROR HY000: Table has no partition for value 5
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+ALTER TABLE t1
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 tablespace t1 engine myisam,
+subpartition x12 tablespace t2 engine myisam),
+partition x2 values less than (5)
+( subpartition x21 tablespace t1 engine myisam,
+subpartition x22 tablespace t2 engine myisam)
+);
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+drop table t1;
+CREATE TABLE t1 (
+a int not null,
+b int not null,
+c int not null,
+primary key (a,b))
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 engine myisam,
+subpartition x12 engine myisam),
+partition x2 values less than (5)
+( subpartition x21 engine myisam,
+subpartition x22 engine myisam)
+);
+INSERT into t1 VALUES (1,1,1);
+INSERT into t1 VALUES (4,1,1);
+INSERT into t1 VALUES (5,1,1);
+ERROR HY000: Table has no partition for value 5
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+ALTER TABLE t1
+partition by range (a)
+subpartition by hash (a+b)
+( partition x1 values less than (1)
+( subpartition x11 engine myisam,
+subpartition x12 engine myisam),
+partition x2 values less than (5)
+( subpartition x21 engine myisam,
+subpartition x22 engine myisam)
+);
+SELECT * from t1;
+a	b	c
+1	1	1
+4	1	1
+drop table t1;
+CREATE TABLE t1 (c1 int default NULL, c2 varchar(30) default NULL, 
+c3 date default NULL) engine=myisam
+PARTITION BY RANGE (year(c3)) (PARTITION p0 VALUES LESS THAN (1995),
+PARTITION p1 VALUES LESS THAN (1996) , PARTITION p2 VALUES LESS THAN (1997) ,
+PARTITION p3 VALUES LESS THAN (1998) , PARTITION p4 VALUES LESS THAN (1999) ,
+PARTITION p5 VALUES LESS THAN (2000) , PARTITION p6 VALUES LESS THAN (2001) ,
+PARTITION p7 VALUES LESS THAN (2002) , PARTITION p8 VALUES LESS THAN (2003) ,
+PARTITION p9 VALUES LESS THAN (2004) , PARTITION p10 VALUES LESS THAN (2010),
+PARTITION p11 VALUES LESS THAN MAXVALUE );
+INSERT INTO t1 VALUES (1, 'testing partitions', '1995-07-17'),
+(3, 'testing partitions','1995-07-31'),
+(5, 'testing partitions','1995-08-13'),
+(7, 'testing partitions','1995-08-26'),
+(9, 'testing partitions','1995-09-09'),
+(0, 'testing partitions','2000-07-10'),
+(2, 'testing partitions','2000-07-23'),
+(4, 'testing partitions','2000-08-05'),
+(6, 'testing partitions','2000-08-19'),
+(8, 'testing partitions','2000-09-01');
+SELECT COUNT(*) FROM t1 WHERE c3 BETWEEN '1996-12-31' AND '2000-12-31';
+COUNT(*)
+5
+SELECT COUNT(*) FROM t1 WHERE c3 < '2000-12-31';
+COUNT(*)
+10
+DROP TABLE t1;
